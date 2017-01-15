@@ -13,9 +13,23 @@ class SqlBuilder {
     private String where;
     private String and;
     private String insert;
+    private String values;
+    private String update;
+    private String set;
+
 
     SqlBuilder select(String select) {
         this.select = " select " + select;
+        return this;
+    }
+
+    SqlBuilder update(String update) {
+        this.update = " update " + update;
+        return this;
+    }
+
+    SqlBuilder set(String set) {
+        this.set = " set " + set;
         return this;
     }
 
@@ -54,8 +68,17 @@ class SqlBuilder {
         return this;
     }
 
+    SqlBuilder values(String values) {
+        this.values = " values(" + values + ") ";
+        return this;
+    }
+
     String build() {
         String result = "";
+        result += insert != null ? insert : "";
+        result += values != null ? values : "";
+        result += update != null ? update : "";
+        result += set != null ? set : "";
         result += select != null ? select : "";
         result += from != null ? from : "";
         result += join != null ? join : "";

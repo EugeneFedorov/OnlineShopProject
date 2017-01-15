@@ -7,7 +7,7 @@ import java.sql.SQLException;
 /**
  * Created by laonen on 05.01.2017.
  */
-class Connector {
+public class Connector {
     private static final String URL = "jdbc:mysql://localhost/onlineshop?autoReconnect=true&useSSL=false";
     private static final String USER = "root";
     private static final String PASSWORD = "1234";
