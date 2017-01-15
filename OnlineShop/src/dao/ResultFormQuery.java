@@ -15,11 +15,13 @@ public class ResultFormQuery {
 
     static Goods getGoodsFromQuery(ResultSet set) throws SQLException {
         Goods goods = new Goods();
-        goods.setId(set.getLong("idGoods"));
-        goods.setName(set.getString("nameGoods"));
-        goods.setDescription(set.getString("description"));
-        goods.setPrice(set.getDouble("price"));
-        goods.setPrice(set.getDouble("remainingAmount"));
+        if (set.next()) {
+            goods.setId(set.getLong("idGoods"));
+            goods.setName(set.getString("nameGoods"));
+            goods.setDescription(set.getString("description"));
+            goods.setPrice(set.getDouble("price"));
+            goods.setPrice(set.getDouble("remainingAmount"));
+        }
         return goods;
     }
 
