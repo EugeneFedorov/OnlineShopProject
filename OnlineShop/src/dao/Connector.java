@@ -3,7 +3,6 @@ package dao;
 import org.apache.tomcat.jdbc.pool.*;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
@@ -14,7 +13,7 @@ class Connector {
     private static final String USER = "root";
     private static final String PASSWORD = "1234";
     private static final String DRIVER = "com.mysql.jdbc.Driver";
-    static DataSource source;
+    private static DataSource source;
 
     static void pool() {
         PoolProperties poolProperties = new PoolProperties();
@@ -27,14 +26,7 @@ class Connector {
 
     static Connection connect() {
         try {
-            Class.forName(DRIVER);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-        System.out.println("Driver loaded successfully!");
-        try {
-            return DriverManager.getConnection(URL, USER, PASSWORD);
+            return source.getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

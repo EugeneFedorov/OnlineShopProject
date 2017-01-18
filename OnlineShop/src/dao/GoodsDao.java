@@ -9,7 +9,7 @@ import java.util.List;
  * Created by laonen on 15.01.2017.
  */
 public class GoodsDao implements GenericDao<Goods> {
-    private Connection connection = Connector.source.getConnection();
+    private Connection connection = Connector.connect();
     private String strSQL;
     private PreparedStatement statement;
 
