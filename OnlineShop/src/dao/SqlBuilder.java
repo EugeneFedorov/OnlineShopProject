@@ -15,6 +15,7 @@ class SqlBuilder {
     private String insert;
     private String values;
     private String update;
+    private String delete;
     private String set;
 
 
@@ -25,6 +26,11 @@ class SqlBuilder {
 
     SqlBuilder update(String update) {
         this.update = " update " + update;
+        return this;
+    }
+
+    SqlBuilder delete() {
+        this.delete = " delete ";
         return this;
     }
 
@@ -75,6 +81,7 @@ class SqlBuilder {
 
     String build() {
         String result = "";
+        result += delete != null ? delete : "";
         result += insert != null ? insert : "";
         result += values != null ? values : "";
         result += update != null ? update : "";

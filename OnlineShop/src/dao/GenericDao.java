@@ -11,7 +11,7 @@ public interface GenericDao<T> {
 
     void update(T entity) throws SQLException;
 
-    boolean delete(T entity) throws SQLException;
+    void delete(T entity) throws SQLException;
 
     List<T> getAll() throws SQLException;
 

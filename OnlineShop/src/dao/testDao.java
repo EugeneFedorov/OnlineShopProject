@@ -9,8 +9,11 @@ import java.sql.SQLException;
  */
 public class testDao {
     public static void main(String[] args) {
+        Connector.pool();
+        Goods goods;
         try {
-            System.out.println(new GoodsDao().getById(5).toString());
+            goods = new GoodsDao().getById(5);
+            new GoodsDao().delete(goods);
         } catch (SQLException e) {
             e.printStackTrace();
         }

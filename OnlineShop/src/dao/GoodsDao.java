@@ -9,9 +9,12 @@ import java.util.List;
  * Created by laonen on 15.01.2017.
  */
 public class GoodsDao implements GenericDao<Goods> {
-    private Connection connection = Connector.connect();
+    private Connection connection = Connector.source.getConnection();
     private String strSQL;
     private PreparedStatement statement;
+
+    public GoodsDao() throws SQLException {
+    }
 
     @Override
     public long create(Goods entity) throws SQLException {
@@ -43,13 +46,18 @@ public class GoodsDao implements GenericDao<Goods> {
     }
 
     @Override
-    public boolean delete(Goods entity) throws SQLException {
-
-        return false;
+    public void delete(Goods entity) throws SQLException {
+        strSQL = new SqlBuilder().delete().from("goods").where(" idGoods = ? ").build();
+        statement = connection.prepareStatement(strSQL);
+        statement.setLong(1, entity.getId());
+        statement.executeUpdate();
+        Connector.disConnect(connection);
     }
 
     @Override
     public List<Goods> getAll() throws SQLException {
+        strSQL = new SqlBuilder().select(" * ").from(" goods ").build();
+        statement = connection.prepareStatement(strSQL);
         return null;
     }
 
