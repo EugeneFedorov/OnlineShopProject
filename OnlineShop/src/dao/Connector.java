@@ -15,13 +15,13 @@ class Connector {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
     private static DataSource source;
 
-    static void pool() {
-        PoolProperties poolProperties = new PoolProperties();
-        poolProperties.setUrl(URL);
-        poolProperties.setUsername(USER);
-        poolProperties.setPassword(PASSWORD);
-        poolProperties.setDriverClassName(DRIVER);
-        source = new DataSource(poolProperties);
+    static {
+            PoolProperties poolProperties = new PoolProperties();
+            poolProperties.setUrl(URL);
+            poolProperties.setUsername(USER);
+            poolProperties.setPassword(PASSWORD);
+            poolProperties.setDriverClassName(DRIVER);
+            source = new DataSource(poolProperties);
     }
 
     static Connection connect() {
