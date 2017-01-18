@@ -12,7 +12,7 @@ public class GoodsDao implements GenericDao<Goods> {
     private String strSQL;
     private PreparedStatement statement;
 
-    public GoodsDao() throws SQLException {
+    GoodsDao() throws SQLException {
     }
 
     @Override
@@ -21,6 +21,7 @@ public class GoodsDao implements GenericDao<Goods> {
         long id = 0L;
         strSQL = new SqlBuilder().insert("goods (nameGoods, description, price, remainingAmount) ").
                 values(" ?, ?, ?, ? ").build();
+        assert connection != null;
         statement = connection.prepareStatement(strSQL, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, entity.getName());
         statement.setString(2, entity.getDescription());
@@ -40,6 +41,7 @@ public class GoodsDao implements GenericDao<Goods> {
         Connection connection = Connector.connect();
         strSQL = new SqlBuilder().update(" goods ").set(" remainingAmount " + entity.getRemainingAmount()).
                 where(" idGoods = ? ").build();
+        assert connection != null;
         statement = connection.prepareStatement(strSQL);
         statement.setLong(1, entity.getId());
         statement.executeUpdate();
@@ -50,6 +52,7 @@ public class GoodsDao implements GenericDao<Goods> {
     public void delete(Goods entity) throws SQLException {
         Connection connection = Connector.connect();
         strSQL = new SqlBuilder().delete().from("goods").where(" idGoods = ? ").build();
+        assert connection != null;
         statement = connection.prepareStatement(strSQL);
         statement.setLong(1, entity.getId());
         statement.executeUpdate();
@@ -60,6 +63,7 @@ public class GoodsDao implements GenericDao<Goods> {
     public List<Goods> getAll() throws SQLException {
         Connection connection = Connector.connect();
         strSQL = new SqlBuilder().select(" * ").from(" goods ").build();
+        assert connection != null;
         statement = connection.prepareStatement(strSQL);
         return null;
     }
@@ -68,6 +72,7 @@ public class GoodsDao implements GenericDao<Goods> {
     public Goods getById(long id) throws SQLException {
         Connection connection = Connector.connect();
         strSQL = new SqlBuilder().select(" * ").from(" goods ").where(" idGoods = ? ").build();
+        assert connection != null;
         statement = connection.prepareStatement(strSQL);
         statement.setLong(1, id);
         statement.execute();
