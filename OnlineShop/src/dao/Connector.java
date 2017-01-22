@@ -14,6 +14,7 @@ class Connector {
     private static final String USER = "root";
     private static final String PASSWORD = "1234";
     private static final String DRIVER = "com.mysql.jdbc.Driver";
+
     private static DataSource source;
     private static boolean testEnvironment;
     private static boolean isInit;
@@ -44,6 +45,7 @@ class Connector {
             init();
         }
         if (testEnvironment) {
+            System.out.println("DriverManager");
             try {
                 return DriverManager.getConnection(URL, USER, PASSWORD);
             } catch (SQLException e) {
@@ -51,6 +53,7 @@ class Connector {
                 return null;
             }
         } else {
+            System.out.println("ConnectionPool");
             try {
                 return source.getConnection();
             } catch (SQLException e) {

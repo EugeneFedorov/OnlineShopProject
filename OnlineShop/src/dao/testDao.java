@@ -14,7 +14,7 @@ public class testDao {
         Connector.setTestEnvironment(true);
         Goods goods;
         try {
-            goods = new GoodsDao().getById(5);
+            goods = new GoodsDao().getById(6);
             new GoodsDao().delete(goods);
         } catch (SQLException e) {
             e.printStackTrace();

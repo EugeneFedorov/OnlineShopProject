@@ -8,11 +8,16 @@ import java.util.List;
  */
 public class Order {
 
+    private  long id;
+    private long idByCustomer;
     private int number;
     private List<Goods> goodsInOrderList;
     private LocalDate openOrder;
     private LocalDate closeOrder;
     private OrderStatus status;
+
+    public Order() {
+    }
 
     public Order(int number, List<Goods> goodsInOrderList) {
         this.number = number;
@@ -23,6 +28,10 @@ public class Order {
 
     public int getNumber() {
         return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public List<Goods> getGoodsInOrderList() {
@@ -45,11 +54,31 @@ public class Order {
         this.closeOrder = closeOrder;
     }
 
+    public void setOpenOrder(LocalDate openOrder) {
+        this.openOrder = openOrder;
+    }
+
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
 
     public boolean addGoodsInOrder(Goods goods, int amount, int id) {
         return goodsInOrderList.add(goods);
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getIdByCustomer() {
+        return idByCustomer;
+    }
+
+    public void setIdByCustomer(long idByCustomer) {
+        this.idByCustomer = idByCustomer;
     }
 }

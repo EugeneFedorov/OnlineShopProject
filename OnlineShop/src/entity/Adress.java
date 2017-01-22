@@ -20,6 +20,14 @@ public class Adress {
         this.home = home;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getCountry() {
         return country;
     }
@@ -50,14 +58,6 @@ public class Adress {
 
     public void setHome(Home home) {
         this.home = home;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 }
 
