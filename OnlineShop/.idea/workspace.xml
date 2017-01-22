@@ -2,31 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab7a7e41-25d8-474b-99ec-dd5fb50a166f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/dao/AdressDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/dao/CustomerDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/dao/HomeDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/dao/OrderLineDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/entity/OrderLine.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/classes/AddNewGoods.java" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../.idea/workspace.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/web_war_exploded/WEB-INF/classes/dao/Connector.class" afterPath="$PROJECT_DIR$/out/artifacts/web_war_exploded/WEB-INF/classes/dao/Connector.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/web_war_exploded/WEB-INF/classes/dao/GoodsDao.class" afterPath="$PROJECT_DIR$/out/artifacts/web_war_exploded/WEB-INF/classes/dao/GoodsDao.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OnlineShop/dao/Connector.class" afterPath="$PROJECT_DIR$/out/production/OnlineShop/dao/Connector.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OnlineShop/dao/GoodsDao.class" afterPath="$PROJECT_DIR$/out/production/OnlineShop/dao/GoodsDao.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OnlineShop/dao/ResultFormQuery.class" afterPath="$PROJECT_DIR$/out/production/OnlineShop/dao/ResultFormQuery.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OnlineShop/dao/testDao.class" afterPath="$PROJECT_DIR$/out/production/OnlineShop/dao/testDao.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OnlineShop/entity/Adress.class" afterPath="$PROJECT_DIR$/out/production/OnlineShop/entity/Adress.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OnlineShop/entity/Order.class" afterPath="$PROJECT_DIR$/out/production/OnlineShop/entity/Order.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OnlineShop.iml" afterPath="$PROJECT_DIR$/OnlineShop.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/dao/Connector.java" afterPath="$PROJECT_DIR$/src/dao/Connector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/dao/GenericDao.java" afterPath="$PROJECT_DIR$/src/dao/GenericDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/dao/GoodsDao.java" afterPath="$PROJECT_DIR$/src/dao/GoodsDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/dao/OrderDao.java" afterPath="$PROJECT_DIR$/src/dao/OrderDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/dao/ResultFormQuery.java" afterPath="$PROJECT_DIR$/src/dao/ResultFormQuery.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/dao/testDao.java" afterPath="$PROJECT_DIR$/src/dao/testDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/Adress.java" afterPath="$PROJECT_DIR$/src/entity/Adress.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/Order.java" afterPath="$PROJECT_DIR$/src/entity/Order.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/dao/AdressDao.java" afterPath="$PROJECT_DIR$/src/dao/AdressDao.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -69,8 +46,8 @@
       <file leaf-file-name="CustomerDao.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/dao/CustomerDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="63" column="41" lean-forward="true" selection-start-line="57" selection-start-column="8" selection-end-line="63" selection-end-column="41" />
+            <state relative-caret-position="651">
+              <caret line="45" column="24" lean-forward="false" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#CustomerDao#0;class#CustomerDao#0" expanded="false" />
@@ -119,13 +96,47 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OrderLineDao.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Connector.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/dao/Connector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="731">
+              <caret line="45" column="9" lean-forward="true" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrderLineDao.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/dao/OrderLineDao.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="319">
               <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="2" lean-forward="true" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdressDao.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/dao/AdressDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="31">
+              <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+              <folding>
+                <element signature="method#AdressDao#0;class#AdressDao#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -168,9 +179,9 @@
         <option value="$PROJECT_DIR$/src/dao/ResultFormQuery.java" />
         <option value="$PROJECT_DIR$/src/entity/OrderLine.java" />
         <option value="$PROJECT_DIR$/src/dao/HomeDao.java" />
-        <option value="$PROJECT_DIR$/src/dao/AdressDao.java" />
         <option value="$PROJECT_DIR$/src/dao/CustomerDao.java" />
         <option value="$PROJECT_DIR$/src/dao/OrderLineDao.java" />
+        <option value="$PROJECT_DIR$/src/dao/AdressDao.java" />
       </list>
     </option>
   </component>
@@ -301,10 +312,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="entity" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -821,12 +828,12 @@
       <workItem from="1484741095330" duration="1571000" />
       <workItem from="1484742931617" duration="778000" />
       <workItem from="1484747617333" duration="5979000" />
-      <workItem from="1485095126693" duration="7781000" />
+      <workItem from="1485095126693" duration="8102000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34318000" />
+    <option name="totallyTimeSpent" value="34639000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1600" height="860" extended-state="0" />
@@ -1075,13 +1082,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="7" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="db://[Connection] TABLE - onlineshop.goods" />
     <entry file="db://[Connection] SESSION BROWSER - Connection" />
     <entry file="db://[Connection] CONSOLE - Connection" />
@@ -1158,16 +1158,6 @@
           <caret line="23" column="20" lean-forward="false" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/Connector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1289,17 +1279,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/AdressDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="16" column="42" lean-forward="false" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#AdressDao#0;class#AdressDao#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/dao/OrderDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="338">
@@ -1311,10 +1290,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/dao/OrderLineDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="2" lean-forward="true" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/dao/CustomerDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="63" column="41" lean-forward="true" selection-start-line="57" selection-start-column="8" selection-end-line="63" selection-end-column="41" />
+        <state relative-caret-position="651">
+          <caret line="45" column="24" lean-forward="false" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#CustomerDao#0;class#CustomerDao#0" expanded="false" />
@@ -1322,12 +1319,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/OrderLineDao.java">
+    <entry file="file://$PROJECT_DIR$/src/dao/Connector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
+        <state relative-caret-position="731">
+          <caret line="45" column="9" lean-forward="true" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dao/AdressDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31">
+          <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+          <folding>
+            <element signature="method#AdressDao#0;class#AdressDao#0" expanded="false" />
           </folding>
         </state>
       </provider>
