@@ -9,9 +9,9 @@ import java.util.List;
 public class Order {
 
     private  long id;
-    private long idByCustomer;
+    private Customer customer;
     private int number;
-    private List<Goods> goodsInOrderList;
+    private List<GoodsInOrder> goodsInOrderList;
     private LocalDate openOrder;
     private LocalDate closeOrder;
     private OrderStatus status;
@@ -19,7 +19,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(int number, List<Goods> goodsInOrderList) {
+    public Order(int number, List<GoodsInOrder> goodsInOrderList) {
         this.number = number;
         this.goodsInOrderList = goodsInOrderList;
         this.openOrder = LocalDate.now();
@@ -32,10 +32,6 @@ public class Order {
 
     public void setNumber(int number) {
         this.number = number;
-    }
-
-    public List<Goods> getGoodsInOrderList() {
-        return goodsInOrderList;
     }
 
     public LocalDate getOpenOrder() {
@@ -62,8 +58,8 @@ public class Order {
         this.status = status;
     }
 
-    public boolean addGoodsInOrder(Goods goods, int amount, int id) {
-        return goodsInOrderList.add(goods);
+    public boolean addGoodsInOrder(Goods goods, double quantity) {
+        return goodsInOrderList.add(new GoodsInOrder(goods, quantity));
     }
 
     public long getId() {
@@ -74,11 +70,11 @@ public class Order {
         this.id = id;
     }
 
-    public long getIdByCustomer() {
-        return idByCustomer;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setIdByCustomer(long idByCustomer) {
-        this.idByCustomer = idByCustomer;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

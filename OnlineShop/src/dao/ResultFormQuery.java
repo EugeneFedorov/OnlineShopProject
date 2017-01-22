@@ -57,9 +57,12 @@ class ResultFormQuery {
         order.setId(set.getLong("idOrder"));
         order.setOpenOrder(set.getDate("openOrder").toLocalDate());
         order.setCloseOrder(set.getDate("closeOrder").toLocalDate());
-        order.setIdByCustomer(set.getLong("idByCustomer"));
         order.setStatus(OrderStatus.valueOf(set.getString("orderStatus")));
         order.setNumber(set.getInt("number"));
+        order.setCustomer(getCustomerFromQuery(set));
+        while(set.next()){
+            order.addGoodsInOrder(getGoodsFromQuery(set), set.getDouble("quantity"));
+        }
         return order;
     }
 }

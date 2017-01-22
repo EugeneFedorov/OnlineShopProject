@@ -28,7 +28,7 @@ public class OrderDao implements GenericDao<Order> {
         statement.setDate(2, Date.valueOf(entity.getOpenOrder()));
         statement.setString(3, entity.getStatus().toString());
         statement.setDouble(4, entity.getNumber());
-        statement.setLong(5, entity.getIdByCustomer());
+        statement.setLong(5, entity.getCustomer().getId());
         statement.executeUpdate();
         ResultSet resultSet = statement.getGeneratedKeys();
         if (resultSet.next()) {
@@ -78,7 +78,10 @@ public class OrderDao implements GenericDao<Order> {
     @Override
     public Order getById(long id) throws SQLException {
         Connection connection = Connector.connect();
-        strSQL = new SqlBuilder().select(" * ").from(" orderinshop ").where(" idOrder = ? ").build();
+        strSQL = new SqlBuilder().select(" os.*, c.*, g.*, ol.quantity ").from(" orderinshop os ").
+                join(" customer c ").on(" c.idCustomer ").equal(" os.idByCustomer ").
+                join(" order_line ol ").on(" ol.idByOrder ").equal(" os.idOrder ").
+                join(" goods g ").on(" g.idGoods ").equal(" ol.idByGoods ").where(" os.idOrder = ? ").build();
         assert connection != null;
         statement = connection.prepareStatement(strSQL);
         statement.setLong(1, id);

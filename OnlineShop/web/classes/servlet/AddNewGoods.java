@@ -1,3 +1,5 @@
+package servlet;
+
 import dao.GoodsDao;
 import entity.Goods;
 
