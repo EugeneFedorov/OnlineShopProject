@@ -13,35 +13,50 @@ public class AdressDao implements GenericDao<Adress> {
     private String strSQL;
     private PreparedStatement statement;
 
-    public AdressDao() throws SQLException {
+    public AdressDao() {
     }
 
     @Override
-    public long create(Adress entity) throws SQLException {
+    public long create(Adress entity) {
         Connection connection = Connector.connect();
         long id = 0L;
-        strSQL = new SqlBuilder().insert("adress (country, town, index, idByHome ) ").
+        strSQL = new SqlBuilder().insert("adress (country, town, post_index, idByHome ) ").
                 values(" ?, ?, ?, ? ").build();
         assert connection != null;
-        statement = connection.prepareStatement(strSQL, Statement.RETURN_GENERATED_KEYS);
-        statement.setString(1, entity.getCountry());
-        statement.setString(2, entity.getTown());
-        statement.setString(3, entity.getIndex());
-        statement.setLong(4, entity.getHome().getId());
-        statement.executeUpdate();
-        ResultSet resultSet = statement.getGeneratedKeys();
-        if (resultSet.next()) {
-            id = resultSet.getLong(1);
+        try {
+            connection.setAutoCommit(false);
+            statement = connection.prepareStatement(strSQL, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, entity.getCountry());
+            statement.setString(2, entity.getTown());
+            statement.setString(3, entity.getPost_index());
+            statement.setLong(4, entity.getHome().getId());
+            statement.executeUpdate();
+            ResultSet resultSet = statement.getGeneratedKeys();
+            if (resultSet.next()) {
+                id = resultSet.getLong(1);
+            }
+            connection.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            connectionRollback(connection);
         }
         Connector.disConnect(connection);
         return id;
+    }
+
+    private void connectionRollback(Connection connection) {
+        try {
+            connection.rollback();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void update(Adress entity) throws SQLException {
         Connection connection = Connector.connect();
         strSQL = new SqlBuilder().update(" adress ").set(" country = " + entity.getCountry() +
-                " , town = " + entity.getTown() + " , index = " + entity.getIndex() +
+                " , town = " + entity.getTown() + " , post_index = " + entity.getPost_index() +
                 " , idByHome = " + entity.getHome().getId()).where(" idHome = ? ").build();
         assert connection != null;
         statement = connection.prepareStatement(strSQL);

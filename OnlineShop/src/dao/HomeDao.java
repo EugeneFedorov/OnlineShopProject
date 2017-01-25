@@ -13,27 +13,42 @@ public class HomeDao implements GenericDao<Home> {
     private String strSQL;
     private PreparedStatement statement;
 
-    public HomeDao() throws SQLException {
+    public HomeDao() {
     }
 
     @Override
-    public long create(Home entity) throws SQLException {
+    public long create(Home entity) {
         Connection connection = Connector.connect();
         long id = 0L;
         strSQL = new SqlBuilder().insert("home (street, numberHouse, numberFlat ) ").
                 values(" ?, ?, ? ").build();
         assert connection != null;
-        statement = connection.prepareStatement(strSQL, Statement.RETURN_GENERATED_KEYS);
-        statement.setString(1, entity.getStreet());
-        statement.setString(2, entity.getNumberHouse());
-        statement.setInt(3, entity.getNumberFlat());
-        statement.executeUpdate();
-        ResultSet resultSet = statement.getGeneratedKeys();
-        if (resultSet.next()) {
-            id = resultSet.getLong(1);
+        try {
+            connection.setAutoCommit(false);
+            statement = connection.prepareStatement(strSQL, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, entity.getStreet());
+            statement.setString(2, entity.getNumberHouse());
+            statement.setInt(3, entity.getNumberFlat());
+            statement.executeUpdate();
+            ResultSet resultSet = statement.getGeneratedKeys();
+            if (resultSet.next()) {
+                id = resultSet.getLong(1);
+            }
+            connection.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            connectionRollback(connection);
         }
         Connector.disConnect(connection);
         return id;
+    }
+
+    private void connectionRollback(Connection connection) {
+        try {
+            connection.rollback();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

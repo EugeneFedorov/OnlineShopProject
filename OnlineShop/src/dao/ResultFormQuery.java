@@ -24,7 +24,7 @@ class ResultFormQuery {
         Adress adress = new Adress();
         adress.setId(set.getLong("idAdress"));
         adress.setTown(set.getString("town"));
-        adress.setIndex(set.getString("index"));
+        adress.setPost_index(set.getString("index"));
         adress.setHome(getHomeFromQuery(set));
         return adress;
     }

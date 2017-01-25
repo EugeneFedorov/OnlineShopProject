@@ -17,7 +17,7 @@ import java.sql.SQLException;
  */
 
 @WebServlet("/addGoods")
-public class AddNewGoods extends HttpServlet {
+public class addNewGoods extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BufferedReader bufferedReader = req.getReader();

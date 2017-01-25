@@ -7,7 +7,7 @@ public class Adress {
     private long id;
     private String country;
     private String town;
-    private String index;
+    private String post_index;
     private Home home;
 
     public Adress() {
@@ -16,7 +16,7 @@ public class Adress {
     public Adress(String country, String town, String index, Home home) {
         this.country = country;
         this.town = town;
-        this.index = index;
+        this.post_index = index;
         this.home = home;
     }
 
@@ -44,12 +44,12 @@ public class Adress {
         this.town = town;
     }
 
-    public String getIndex() {
-        return index;
+    public String getPost_index() {
+        return post_index;
     }
 
-    public void setIndex(String index) {
-        this.index = index;
+    public void setPost_index(String post_index) {
+        this.post_index = post_index;
     }
 
     public Home getHome() {
