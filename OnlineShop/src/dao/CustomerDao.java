@@ -126,6 +126,25 @@ public class CustomerDao implements GenericDao<Customer> {
         }
     }
 
+    public String getRole(String userName) {
+        Connection connection = Connector.connect();
+        strSQL = new SqlBuilder().select(" role ").from(" customer ").where(" name = ? ").build();
+        assert connection != null;
+        try {
+            statement = connection.prepareStatement(strSQL);
+            statement.setString(1, userName);
+            statement.execute();
+            ResultSet resultSet = statement.getResultSet();
+            if (resultSet.next()) {
+                return resultSet.getString("role");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "";
+        }
+            return "";
+    }
+
     private void connectionRollback(Connection connection) {
         try {
             connection.rollback();

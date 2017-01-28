@@ -13,25 +13,30 @@ public class GoodsDao implements GenericDao<Goods> {
     private String strSQL;
     private PreparedStatement statement;
 
-    public GoodsDao() throws SQLException {
+    public GoodsDao() {
     }
 
     @Override
-    public long create(Goods entity) throws SQLException {
+    public long create(Goods entity) {
         Connection connection = Connector.connect();
         long id = 0L;
         strSQL = new SqlBuilder().insert("goods (nameGoods, description, price, remainingAmount) ").
                 values(" ?, ?, ?, ? ").build();
         assert connection != null;
-        statement = connection.prepareStatement(strSQL, Statement.RETURN_GENERATED_KEYS);
-        statement.setString(1, entity.getName());
-        statement.setString(2, entity.getDescription());
-        statement.setDouble(3, entity.getPrice());
-        statement.setDouble(4, entity.getRemainingAmount());
-        statement.executeUpdate();
-        ResultSet resultSet = statement.getGeneratedKeys();
-        if (resultSet.next()) {
-            id = resultSet.getLong(1);
+        try {
+            statement = connection.prepareStatement(strSQL, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, entity.getName());
+            statement.setString(2, entity.getDescription());
+            statement.setDouble(3, entity.getPrice());
+            statement.setDouble(4, entity.getRemainingAmount());
+            statement.executeUpdate();
+            ResultSet resultSet = statement.getGeneratedKeys();
+            if (resultSet.next()) {
+                id = resultSet.getLong(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return id;
         }
         Connector.disConnect(connection);
         return id;

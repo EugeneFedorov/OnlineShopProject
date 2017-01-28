@@ -11,8 +11,7 @@
     <title>login</title>
 </head>
 <body>
-
-<form method="post">
+<form action="/login" method="post">
     <table>
         <th colspan=2><h1>Авторизация</h1></th>
         <tr>

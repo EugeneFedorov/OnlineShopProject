@@ -19,4 +19,8 @@ public class LoginService {
     public boolean isExist(LoginDto dto) {
         return new CustomerDao().isByNamePwd(dto.getUsername(), dto.getPassword());
     }
+
+    public String getRole(LoginDto dto) {
+        return new CustomerDao().getRole(dto.getUsername());
+    }
 }

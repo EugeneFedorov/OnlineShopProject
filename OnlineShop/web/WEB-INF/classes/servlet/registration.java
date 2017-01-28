@@ -16,6 +16,9 @@ import java.io.IOException;
  */
 @WebServlet("/login/registration")
 public class registration extends HttpServlet {
+    private static final String ADMIN = "admin";
+    private static final String USER = "user";
+
     private RequestDispatcher requestDispatcher = null;
 
     @Override
@@ -42,6 +45,7 @@ public class registration extends HttpServlet {
         RegistrationService instance = RegistrationService.getInstance();
         if (instance.isRegistration(dto)) {
             requestDispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/main.jsp");
+            req.getSession().setAttribute(USER, name);
             requestDispatcher.forward(req, resp);
         } else {
             requestDispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/registration.jsp");

@@ -21,12 +21,13 @@ public class RegistrationService {
         return instance;
     }
 
-    public boolean isRegistration(RegistrationDto dto){
-        Home home = new Home(dto.getStreet(),dto.getNumberHouse(),dto.getNumberFlat());
+    public boolean isRegistration(RegistrationDto dto) {
+        Home home = new Home(dto.getStreet(), dto.getNumberHouse(), dto.getNumberFlat());
         home.setId(new HomeDao().create(home));
         Adress adress = new Adress(dto.getCountry(), dto.getTown(), dto.getPost_index(), home);
         adress.setId(new AdressDao().create(adress));
-        Customer customer = new Customer();
-        return new CustomerDao().create(customer)> 0L;
+        Customer customer = new Customer(dto.getName(), dto.getSurname(), dto.getEmail(),
+                dto.getPassword(), dto.getPhone(), adress);
+        return new CustomerDao().create(customer) > 0L;
     }
 }

@@ -21,11 +21,7 @@ public class addNewGoods extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BufferedReader bufferedReader = req.getReader();
-        try {
-            System.out.println(new GoodsDao().create(new Goods(bufferedReader.readLine(), bufferedReader.readLine(),
-                    Double.parseDouble(bufferedReader.readLine()), Double.parseDouble(bufferedReader.readLine()))));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        System.out.println(new GoodsDao().create(new Goods(bufferedReader.readLine(), bufferedReader.readLine(),
+                Double.parseDouble(bufferedReader.readLine()), Double.parseDouble(bufferedReader.readLine()))));
     }
 }

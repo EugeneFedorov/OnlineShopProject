@@ -16,6 +16,9 @@ import java.io.IOException;
  */
 @WebServlet("/login")
 public class login extends HttpServlet {
+    private static final String ADMIN = "admin";
+    private static final String USER = "user";
+
     private RequestDispatcher requestDispatcher = null;
 
     @Override
@@ -31,11 +34,16 @@ public class login extends HttpServlet {
         LoginDto loginDto = new LoginDto(user, pwd);
         LoginService loginService = LoginService.getInstance();
         if (loginService.isExist(loginDto)) {
-            requestDispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/main.jsp");
-            requestDispatcher.forward(req, resp);
+            if (loginService.getRole(loginDto).equalsIgnoreCase(ADMIN)) {
+                requestDispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/admin.jsp");
+                req.getSession().setAttribute(ADMIN, user);
+            } else {
+                requestDispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/main.jsp");
+                req.getSession().setAttribute(USER, user);
+            }
         } else {
             requestDispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp");
-            requestDispatcher.forward(req, resp);
         }
+        requestDispatcher.forward(req, resp);
     }
 }
