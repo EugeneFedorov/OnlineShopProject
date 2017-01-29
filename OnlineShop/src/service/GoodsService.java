@@ -36,7 +36,7 @@ public class GoodsService {
     public List<GoodsDto> getAllGoods() {
         List<GoodsDto> goodsDtoList = new ArrayList<>();
         for (Goods g : new GoodsDao().getAll()) {
-            goodsDtoList.add(new GoodsDto(g.getId(),g.getName(),g.getDescription(),g.getPrice(),g.getRemainingAmount()));
+            goodsDtoList.add(new GoodsDto(g.getId(), g.getName(), g.getDescription(), g.getPrice(), g.getRemainingAmount()));
         }
         return goodsDtoList;
     }

@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static dao.ClosableUtils.silentClose;
+
 /**
  * Created by laonen on 05.01.2017.
  */
@@ -33,22 +35,13 @@ public class Connector {
             poolProperties.setUsername(USER);
             poolProperties.setPassword(PASSWORD);
             poolProperties.setDriverClassName(DRIVER);
-            poolProperties.setJmxEnabled(true);
-            poolProperties.setTestWhileIdle(false);
-            poolProperties.setTestOnBorrow(true);
-            poolProperties.setValidationQuery("SELECT 1");
-            poolProperties.setTestOnReturn(false);
-            poolProperties.setValidationInterval(30000);
-            poolProperties.setTimeBetweenEvictionRunsMillis(30000);
-            poolProperties.setMaxActive(100);
-            poolProperties.setInitialSize(10);
-            poolProperties.setMaxWait(10000);
-            poolProperties.setRemoveAbandonedTimeout(60);
-            poolProperties.setMinEvictableIdleTimeMillis(30000);
-            poolProperties.setMinIdle(10);
-            poolProperties.setLogAbandoned(true);
-            poolProperties.setRemoveAbandoned(true);
+            poolProperties.setMaxActive(10);
+            poolProperties.setMaxIdle(5);
+            poolProperties.setMinIdle(3);
+            poolProperties.setInitialSize(5);
+            poolProperties.setInitialSize(5);
             source = new DataSource(poolProperties);
+            isInit = true;
         } else {
             try {
                 Class.forName(DRIVER);
@@ -71,7 +64,6 @@ public class Connector {
                 throw new RuntimeException("jdbc layer error", e);
             }
         } else {
-            System.out.println("ConnectionPool open");
             try {
                 return source.getConnection();
             } catch (SQLException e) {
@@ -83,16 +75,5 @@ public class Connector {
 
     static void disConnect(Connection connection) {
         silentClose(connection);
-    }
-
-    private static void silentClose(Connection closable) {
-        if (closable != null) {
-            try {
-                closable.close();
-                System.out.println("ConnectionPool close");
-            } catch (SQLException e) {
-                log.log(Level.WARNING, String.format("Was unable to close: %s%n", closable), e);
-            }
-        }
     }
 }

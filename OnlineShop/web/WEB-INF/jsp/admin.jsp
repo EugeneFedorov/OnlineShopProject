@@ -1,10 +1,12 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: laonen
-  Date: 25.01.2017
-  Time: 20:25
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+
+<fmt:setBundle basename="translations"/>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -12,7 +14,7 @@
     <title>admin</title>
 </head>
 <body>
-<h1>Welcome home dear admin!</h1>
+<h1><fmt:message key="admin.Welcome"/></h1>
 <form action="/admin" method="post">
     <table>
         <tr>

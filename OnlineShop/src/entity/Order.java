@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Order {
 
-    private  long id;
+    private long id;
     private Customer customer;
     private String number;
     private List<GoodsInOrder> goodsInOrderList;

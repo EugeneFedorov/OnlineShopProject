@@ -60,7 +60,7 @@ class ResultFormQuery {
         order.setStatus(OrderStatus.valueOf(set.getString("orderStatus")));
         order.setNumber(set.getString("number"));
         order.setCustomer(getCustomerFromQuery(set));
-        while(set.next()){
+        while (set.next()) {
             order.addGoodsInOrder(getGoodsFromQuery(set), set.getDouble("quantity"));
         }
         return order;

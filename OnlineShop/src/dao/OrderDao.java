@@ -48,7 +48,7 @@ public class OrderDao implements GenericDao<Order> {
         Connection connection = Connector.connect();
         strSQL = new SqlBuilder().update(" orderinshop ").set(" closeOrder = " + entity.getCloseOrder()
                 + " , orderStatus = '" + entity.getStatus().toString()
-                + "' , number = '" + entity.getNumber()+ "'").where(" idOrder = ? ").build();
+                + "' , number = '" + entity.getNumber() + "'").where(" idOrder = ? ").build();
         assert connection != null;
         executeUpdate(entity, connection);
         Connector.disConnect(connection);
@@ -77,7 +77,7 @@ public class OrderDao implements GenericDao<Order> {
     }
 
     @Override
-    public List<Order> getAll()  {
+    public List<Order> getAll() {
         List<Order> orderList = new ArrayList<>();
         Connection connection = Connector.connect();
         strSQL = new SqlBuilder().select(" * ").from(" orderinshop ").build();
@@ -97,7 +97,7 @@ public class OrderDao implements GenericDao<Order> {
     }
 
     @Override
-    public Order getById(long id)  {
+    public Order getById(long id) {
         Connection connection = Connector.connect();
         strSQL = new SqlBuilder().select(" os.*, c.*, g.*, ol.quantity ").from(" orderinshop os ").
                 join(" customer c ").on(" c.idCustomer ").equal(" os.idByCustomer ").

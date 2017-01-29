@@ -13,7 +13,7 @@ public class OrderLineDao implements GenericDao<OrderLine> {
     private PreparedStatement statement;
 
     @Override
-    public long create(OrderLine entity)  {
+    public long create(OrderLine entity) {
         Connection connection = Connector.connect();
         strSQL = new SqlBuilder().insert("order_line (idByGoods, idByOrder, quantity ) ").
                 values(" ?, ?, ? ").build();

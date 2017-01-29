@@ -6,12 +6,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static dao.ClosableUtils.silentClose;
+
 /**
  * Created by laonen on 22.01.2017.
  */
 public class CustomerDao implements GenericDao<Customer> {
     private String strSQL;
-    private PreparedStatement statement;
+
 
     public CustomerDao() {
     }
@@ -19,6 +21,8 @@ public class CustomerDao implements GenericDao<Customer> {
     @Override
     public long create(Customer entity) {
         Connection connection = Connector.connect();
+        PreparedStatement statement = null;
+        ResultSet rs = null;
         long id = 0L;
         strSQL = new SqlBuilder().insert("customer (name, surname, email, password, idByAdress, phone ) ").
                 values(" ?, ?, ?, ?, ?, ? ").build();
@@ -33,9 +37,9 @@ public class CustomerDao implements GenericDao<Customer> {
             statement.setLong(5, entity.getAdress().getId());
             statement.setString(6, entity.getPhone());
             statement.executeUpdate();
-            ResultSet resultSet = statement.getGeneratedKeys();
-            if (resultSet.next()) {
-                id = resultSet.getLong(1);
+            rs = statement.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getLong(1);
             }
             connection.commit();
             return id;
@@ -44,6 +48,8 @@ public class CustomerDao implements GenericDao<Customer> {
             connectionRollback(connection);
             return id;
         } finally {
+            silentClose(rs);
+            silentClose(statement);
             Connector.disConnect(connection);
         }
     }
@@ -51,6 +57,7 @@ public class CustomerDao implements GenericDao<Customer> {
     @Override
     public void update(Customer entity) {
         Connection connection = Connector.connect();
+        PreparedStatement statement = null;
         strSQL = new SqlBuilder().update(" customer ").set(" name = " + entity.getName()
                 + " , surname = " + entity.getSurname() + " , email = " + entity.getEmail()
                 + " , password = " + entity.getPassword() + " , idByAdress = " + entity.getAdress().getId()
@@ -66,37 +73,55 @@ public class CustomerDao implements GenericDao<Customer> {
             e.printStackTrace();
             connectionRollback(connection);
         }
+        silentClose(statement);
         Connector.disConnect(connection);
     }
 
     @Override
-    public void delete(Customer entity) throws SQLException {
+    public void delete(Customer entity)  {
         Connection connection = Connector.connect();
+        PreparedStatement statement = null;
         strSQL = new SqlBuilder().delete().from("customer").where(" idCustomer = ? ").build();
         assert connection != null;
-        statement = connection.prepareStatement(strSQL);
-        statement.setLong(1, entity.getId());
-        statement.executeUpdate();
+        try {
+            statement = connection.prepareStatement(strSQL);
+            statement.setLong(1, entity.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        silentClose(statement);
         Connector.disConnect(connection);
     }
 
     @Override
-    public List<Customer> getAll() throws SQLException {
+    public List<Customer> getAll()  {
         List<Customer> customerList = new ArrayList<>();
         Connection connection = Connector.connect();
+        PreparedStatement statement = null;
+        ResultSet rs = null;
         strSQL = new SqlBuilder().select(" * ").from(" customer ").build();
         assert connection != null;
-        statement = connection.prepareStatement(strSQL);
-        ResultSet set = statement.getResultSet();
-        while (set.next()) {
-            customerList.add(ResultFormQuery.getCustomerFromQuery(set));
+        try {
+            statement = connection.prepareStatement(strSQL);
+            rs = statement.getResultSet();
+            while (rs.next()) {
+                customerList.add(ResultFormQuery.getCustomerFromQuery(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        silentClose(statement);
+        silentClose(rs);
+        Connector.disConnect(connection);
         return customerList;
     }
 
     @Override
     public Customer getById(long id) {
         Connection connection = Connector.connect();
+        PreparedStatement statement = null;
+        ResultSet rs = null;
         strSQL = new SqlBuilder().select(" * ").from(" customer c ").
                 join(" adress a ").on(" c.idByAdress ").equal(" a.idAdress ").where(" c.idCustomer = ? ").build();
         assert connection != null;
@@ -104,8 +129,9 @@ public class CustomerDao implements GenericDao<Customer> {
             statement = connection.prepareStatement(strSQL);
             statement.setLong(1, id);
             statement.execute();
-            if (statement.getResultSet().next()) {
-                return ResultFormQuery.getCustomerFromQuery(statement.getResultSet());
+            rs = statement.getResultSet();
+            if (rs.next()) {
+                return ResultFormQuery.getCustomerFromQuery(rs);
             } else {
                 return null;
             }
@@ -113,6 +139,8 @@ public class CustomerDao implements GenericDao<Customer> {
             e.printStackTrace();
             return null;
         } finally {
+            silentClose(statement);
+            silentClose(rs);
             Connector.disConnect(connection);
         }
     }
@@ -120,28 +148,34 @@ public class CustomerDao implements GenericDao<Customer> {
     public long idByNamePwd(String user, String pwd) {
         long id = 0L;
         Connection connection = Connector.connect();
+        PreparedStatement statement = null;
         strSQL = new SqlBuilder().select(" idCustomer ").from(" customer ").
                 where(" name = ? ").and(" password = ? ").build();
+        ResultSet rs = null;
         assert connection != null;
         try {
             statement = connection.prepareStatement(strSQL);
             statement.setString(1, user);
             statement.setString(2, pwd);
             statement.execute();
-            if (statement.getResultSet().next()) {
-                id = statement.getResultSet().getLong("idCustomer");
+            rs = statement.getResultSet();
+            if (rs.next()) {
+                id = rs.getLong("idCustomer");
             }
             return id;
         } catch (SQLException e) {
             e.printStackTrace();
             return id;
         } finally {
+            silentClose(statement);
+            silentClose(rs);
             Connector.disConnect(connection);
         }
     }
 
     public String getRole(String userName) {
         Connection connection = Connector.connect();
+        PreparedStatement statement;
         strSQL = new SqlBuilder().select(" role ").from(" customer ").where(" name = ? ").build();
         assert connection != null;
         try {
