@@ -43,15 +43,23 @@ public class GoodsDao implements GenericDao<Goods> {
     }
 
     @Override
-    public void update(Goods entity) throws SQLException {
+    public void update(Goods entity) {
         Connection connection = Connector.connect();
         strSQL = new SqlBuilder().update(" goods ").set(" remainingAmount = " + entity.getRemainingAmount()).
                 where(" idGoods = ? ").build();
         assert connection != null;
-        statement = connection.prepareStatement(strSQL);
-        statement.setLong(1, entity.getId());
-        statement.executeUpdate();
+        executeUpdate(entity, connection);
         Connector.disConnect(connection);
+    }
+
+    private void executeUpdate(Goods entity, Connection connection) {
+        try {
+            statement = connection.prepareStatement(strSQL);
+            statement.setLong(1, entity.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -66,31 +74,46 @@ public class GoodsDao implements GenericDao<Goods> {
     }
 
     @Override
-    public List<Goods> getAll() throws SQLException {
+    public List<Goods> getAll() {
         List<Goods> goodsList = new ArrayList<>();
         Connection connection = Connector.connect();
         strSQL = new SqlBuilder().select(" * ").from(" goods ").build();
         assert connection != null;
-        statement = connection.prepareStatement(strSQL);
-        ResultSet set = statement.getResultSet();
-        while (set.next()) {
-            goodsList.add(ResultFormQuery.getGoodsFromQuery(set));
+        try {
+            statement = connection.prepareStatement(strSQL);
+            statement.execute();
+            ResultSet set = statement.getResultSet();
+            while (set.next()) {
+                goodsList.add(ResultFormQuery.getGoodsFromQuery(set));
+            }
+            return goodsList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return goodsList;
+        } finally {
+            Connector.disConnect(connection);
         }
-        return goodsList;
     }
 
     @Override
-    public Goods getById(long id) throws SQLException {
+    public Goods getById(long id) {
         Connection connection = Connector.connect();
         strSQL = new SqlBuilder().select(" * ").from(" goods ").where(" idGoods = ? ").build();
         assert connection != null;
-        statement = connection.prepareStatement(strSQL);
-        statement.setLong(1, id);
-        statement.execute();
-        if (statement.getResultSet().next()) {
-            return ResultFormQuery.getGoodsFromQuery(statement.getResultSet());
-        } else {
+        try {
+            statement = connection.prepareStatement(strSQL);
+            statement.setLong(1, id);
+            statement.execute();
+            if (statement.getResultSet().next()) {
+                return ResultFormQuery.getGoodsFromQuery(statement.getResultSet());
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
             return null;
+        } finally {
+            Connector.disConnect(connection);
         }
     }
 }

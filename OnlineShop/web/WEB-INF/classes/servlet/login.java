@@ -18,6 +18,7 @@ import java.io.IOException;
 public class login extends HttpServlet {
     private static final String ADMIN = "admin";
     private static final String USER = "user";
+    private static final String PWD = "pwd";
 
     private RequestDispatcher requestDispatcher = null;
 
@@ -33,13 +34,14 @@ public class login extends HttpServlet {
         String pwd = req.getParameter("password");
         LoginDto loginDto = new LoginDto(user, pwd);
         LoginService loginService = LoginService.getInstance();
-        if (loginService.isExist(loginDto)) {
+        if (loginService.idUser(loginDto) > 0L) {
             if (loginService.getRole(loginDto).equalsIgnoreCase(ADMIN)) {
                 requestDispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/admin.jsp");
                 req.getSession().setAttribute(ADMIN, user);
             } else {
                 requestDispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/main.jsp");
                 req.getSession().setAttribute(USER, user);
+                req.getSession().setAttribute(PWD, pwd);
             }
         } else {
             requestDispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp");

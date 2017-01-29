@@ -4,23 +4,29 @@ package entity;
  * Created by laonen on 22.01.2017.
  */
 public class OrderLine {
-    private Goods idByGoods;
-    private Order idByOrder;
+    private long idByGoods;
+    private long idByOrder;
     private double quantity;
 
-    public Goods getIdByGoods() {
+    public OrderLine(long idByGoods, long idByOrder, double quantity) {
+        this.idByGoods = idByGoods;
+        this.idByOrder = idByOrder;
+        this.quantity = quantity;
+    }
+
+    public long getIdByGoods() {
         return idByGoods;
     }
 
-    public void setIdByGoods(Goods idByGoods) {
+    public void setIdByGoods(long idByGoods) {
         this.idByGoods = idByGoods;
     }
 
-    public Order getIdByOrder() {
+    public long getIdByOrder() {
         return idByOrder;
     }
 
-    public void setIdByOrder(Order idByOrder) {
+    public void setIdByOrder(long idByOrder) {
         this.idByOrder = idByOrder;
     }
 

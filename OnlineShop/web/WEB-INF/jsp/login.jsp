@@ -9,9 +9,22 @@
 <html>
 <head>
     <title>login</title>
+    <style>
+        table {
+            width: 50%;
+            background: white;
+            color: #1f1f1f;
+            border-spacing: 1px;
+        }
+
+        td, th {
+            background: #86e894;
+            padding: 5px;
+        }
+    </style>
 </head>
 <body>
-<form action="/login" method="post">
+<form action="${pageContext.request.contextPath}/login" method="post">
     <table>
         <th colspan=2><h1>Авторизация</h1></th>
         <tr>
@@ -25,10 +38,8 @@
         </tr>
 
         <tr>
-            <td colspan=2><input type="submit" value="Авторизоваться"></td>
-        </tr>
-        <tr>
-            <td colspan=2>
+            <td><input type="submit" value="Авторизоваться"></td>
+            <td>
                 <form method="get">
                     <p><input type="button" value="Зарегистрироваться"
                               onClick='location.href="http://localhost:8080/login/registration"'></p>

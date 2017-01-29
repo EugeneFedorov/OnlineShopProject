@@ -85,6 +85,7 @@ public class HomeDao implements GenericDao<Home> {
         while (set.next()) {
             homeList.add(ResultFormQuery.getHomeFromQuery(set));
         }
+        Connector.disConnect(connection);
         return homeList;
     }
 
@@ -97,8 +98,10 @@ public class HomeDao implements GenericDao<Home> {
         statement.setLong(1, id);
         statement.execute();
         if (statement.getResultSet().next()) {
+            Connector.disConnect(connection);
             return ResultFormQuery.getHomeFromQuery(statement.getResultSet());
         } else {
+            Connector.disConnect(connection);
             return null;
         }
     }

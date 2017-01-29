@@ -13,16 +13,20 @@ public class OrderLineDao implements GenericDao<OrderLine> {
     private PreparedStatement statement;
 
     @Override
-    public long create(OrderLine entity) throws SQLException {
+    public long create(OrderLine entity)  {
         Connection connection = Connector.connect();
         strSQL = new SqlBuilder().insert("order_line (idByGoods, idByOrder, quantity ) ").
                 values(" ?, ?, ? ").build();
         assert connection != null;
-        statement = connection.prepareStatement(strSQL);
-        statement.setLong(1, entity.getIdByGoods().getId());
-        statement.setLong(2, entity.getIdByOrder().getId());
-        statement.setDouble(3, entity.getQuantity());
-        statement.executeUpdate();
+        try {
+            statement = connection.prepareStatement(strSQL);
+            statement.setLong(1, entity.getIdByGoods());
+            statement.setLong(2, entity.getIdByOrder());
+            statement.setDouble(3, entity.getQuantity());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         Connector.disConnect(connection);
         return 0L;
     }
@@ -34,8 +38,8 @@ public class OrderLineDao implements GenericDao<OrderLine> {
                 where(" idByGoods = ? ").and(" idByOrder = ? ").build();
         assert connection != null;
         statement = connection.prepareStatement(strSQL);
-        statement.setLong(1, entity.getIdByGoods().getId());
-        statement.setLong(2, entity.getIdByOrder().getId());
+        statement.setLong(1, entity.getIdByGoods());
+        statement.setLong(2, entity.getIdByOrder());
         statement.executeUpdate();
         Connector.disConnect(connection);
     }
@@ -46,8 +50,8 @@ public class OrderLineDao implements GenericDao<OrderLine> {
         strSQL = new SqlBuilder().delete().from("order_line").where(" idByGoods = ? ").and(" idByOrder = ? ").build();
         assert connection != null;
         statement = connection.prepareStatement(strSQL);
-        statement.setLong(1, entity.getIdByGoods().getId());
-        statement.setLong(2, entity.getIdByOrder().getId());
+        statement.setLong(1, entity.getIdByGoods());
+        statement.setLong(2, entity.getIdByOrder());
         statement.executeUpdate();
         Connector.disConnect(connection);
     }

@@ -16,8 +16,8 @@ public class LoginService {
         return instance;
     }
 
-    public boolean isExist(LoginDto dto) {
-        return new CustomerDao().isByNamePwd(dto.getUsername(), dto.getPassword());
+    public long idUser(LoginDto dto) {
+        return new CustomerDao().idByNamePwd(dto.getUsername(), dto.getPassword());
     }
 
     public String getRole(LoginDto dto) {

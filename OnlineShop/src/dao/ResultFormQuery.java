@@ -16,7 +16,7 @@ class ResultFormQuery {
         goods.setName(set.getString("nameGoods"));
         goods.setDescription(set.getString("description"));
         goods.setPrice(set.getDouble("price"));
-        goods.setPrice(set.getDouble("remainingAmount"));
+        goods.setRemainingAmount(set.getDouble("remainingAmount"));
         return goods;
     }
 
@@ -24,8 +24,9 @@ class ResultFormQuery {
         Adress adress = new Adress();
         adress.setId(set.getLong("idAdress"));
         adress.setTown(set.getString("town"));
-        adress.setPost_index(set.getString("index"));
-        adress.setHome(getHomeFromQuery(set));
+        adress.setPost_index(set.getString("post_index"));
+        Home home = new HomeDao().getById(set.getInt("idByHome"));
+        adress.setHome(home);
         return adress;
     }
 
@@ -45,10 +46,9 @@ class ResultFormQuery {
         customer.setSurname(set.getString("surname"));
         customer.setEmail(set.getString("email"));
         customer.setPassword(set.getString("password"));
-        Adress adress = new Adress(); //set.getInt("idByAdress")
+        Adress adress = new AdressDao().getById(set.getInt("idByAdress"));
         customer.setAdress(adress);
         customer.setPhone(set.getString("phone"));
-        customer.setAdress(getAdressFromQuery(set));
         return customer;
     }
 
@@ -58,7 +58,7 @@ class ResultFormQuery {
         order.setOpenOrder(set.getDate("openOrder").toLocalDate());
         order.setCloseOrder(set.getDate("closeOrder").toLocalDate());
         order.setStatus(OrderStatus.valueOf(set.getString("orderStatus")));
-        order.setNumber(set.getInt("number"));
+        order.setNumber(set.getString("number"));
         order.setCustomer(getCustomerFromQuery(set));
         while(set.next()){
             order.addGoodsInOrder(getGoodsFromQuery(set), set.getDouble("quantity"));

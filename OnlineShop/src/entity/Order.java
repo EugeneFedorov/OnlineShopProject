@@ -10,27 +10,28 @@ public class Order {
 
     private  long id;
     private Customer customer;
-    private int number;
+    private String number;
     private List<GoodsInOrder> goodsInOrderList;
     private LocalDate openOrder;
     private LocalDate closeOrder;
     private OrderStatus status;
 
-    public Order() {
-    }
-
-    public Order(int number, List<GoodsInOrder> goodsInOrderList) {
-        this.number = number;
-        this.goodsInOrderList = goodsInOrderList;
+    public Order(Customer customer) {
+        this.customer = customer;
         this.openOrder = LocalDate.now();
         this.status = OrderStatus.ORDER_IN_ACCEPTED;
     }
 
-    public int getNumber() {
+    public Order() {
+        this.openOrder = LocalDate.now();
+        this.status = OrderStatus.ORDER_IN_ACCEPTED;
+    }
+
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 

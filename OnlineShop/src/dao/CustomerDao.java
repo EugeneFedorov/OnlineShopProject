@@ -95,21 +95,30 @@ public class CustomerDao implements GenericDao<Customer> {
     }
 
     @Override
-    public Customer getById(long id) throws SQLException {
+    public Customer getById(long id) {
         Connection connection = Connector.connect();
-        strSQL = new SqlBuilder().select(" * ").from(" customer ").where(" idCustomer = ? ").build();
+        strSQL = new SqlBuilder().select(" * ").from(" customer c ").
+                join(" adress a ").on(" c.idByAdress ").equal(" a.idAdress ").where(" c.idCustomer = ? ").build();
         assert connection != null;
-        statement = connection.prepareStatement(strSQL);
-        statement.setLong(1, id);
-        statement.execute();
-        if (statement.getResultSet().next()) {
-            return ResultFormQuery.getCustomerFromQuery(statement.getResultSet());
-        } else {
+        try {
+            statement = connection.prepareStatement(strSQL);
+            statement.setLong(1, id);
+            statement.execute();
+            if (statement.getResultSet().next()) {
+                return ResultFormQuery.getCustomerFromQuery(statement.getResultSet());
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
             return null;
+        } finally {
+            Connector.disConnect(connection);
         }
     }
 
-    public boolean isByNamePwd(String user, String pwd) {
+    public long idByNamePwd(String user, String pwd) {
+        long id = 0L;
         Connection connection = Connector.connect();
         strSQL = new SqlBuilder().select(" idCustomer ").from(" customer ").
                 where(" name = ? ").and(" password = ? ").build();
@@ -119,10 +128,15 @@ public class CustomerDao implements GenericDao<Customer> {
             statement.setString(1, user);
             statement.setString(2, pwd);
             statement.execute();
-            return statement.getResultSet().next() && statement.getResultSet().getLong("idCustomer") > 0;
+            if (statement.getResultSet().next()) {
+                id = statement.getResultSet().getLong("idCustomer");
+            }
+            return id;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return id;
+        } finally {
+            Connector.disConnect(connection);
         }
     }
 
@@ -141,8 +155,10 @@ public class CustomerDao implements GenericDao<Customer> {
         } catch (SQLException e) {
             e.printStackTrace();
             return "";
+        } finally {
+            Connector.disConnect(connection);
         }
-            return "";
+        return "";
     }
 
     private void connectionRollback(Connection connection) {

@@ -7,6 +7,19 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<style>
+    table {
+        width: 50%;
+        background: white;
+        color: #1f1f1f;
+        border-spacing: 1px;
+    }
+
+    td, th {
+        background: #86e894;
+        padding: 5px;
+    }
+</style>
 <body>
 <form action="${pageContext.request.contextPath}/login/registration" method="post">
     <table>

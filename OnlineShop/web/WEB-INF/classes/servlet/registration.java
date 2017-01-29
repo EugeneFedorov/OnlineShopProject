@@ -16,8 +16,8 @@ import java.io.IOException;
  */
 @WebServlet("/login/registration")
 public class registration extends HttpServlet {
-    private static final String ADMIN = "admin";
     private static final String USER = "user";
+    private static final String PSW = "psw";
 
     private RequestDispatcher requestDispatcher = null;
 
@@ -46,6 +46,7 @@ public class registration extends HttpServlet {
         if (instance.isRegistration(dto)) {
             requestDispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/main.jsp");
             req.getSession().setAttribute(USER, name);
+            req.getSession().setAttribute(PSW, password);
             requestDispatcher.forward(req, resp);
         } else {
             requestDispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/registration.jsp");

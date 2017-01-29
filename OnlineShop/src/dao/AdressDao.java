@@ -87,20 +87,24 @@ public class AdressDao implements GenericDao<Adress> {
         while (set.next()) {
             adressList.add(ResultFormQuery.getAdressFromQuery(set));
         }
+        Connector.disConnect(connection);
         return adressList;
     }
 
     @Override
     public Adress getById(long id) throws SQLException {
         Connection connection = Connector.connect();
-        strSQL = new SqlBuilder().select(" * ").from(" adress ").where(" idAdress = ? ").build();
+        strSQL = new SqlBuilder().select(" * ").from(" adress a ").
+                join(" home h ").on(" a.idByHome ").equal(" h.idHome ").where(" a.idAdress = ? ").build();
         assert connection != null;
         statement = connection.prepareStatement(strSQL);
         statement.setLong(1, id);
         statement.execute();
         if (statement.getResultSet().next()) {
+            Connector.disConnect(connection);
             return ResultFormQuery.getAdressFromQuery(statement.getResultSet());
         } else {
+            Connector.disConnect(connection);
             return null;
         }
     }
