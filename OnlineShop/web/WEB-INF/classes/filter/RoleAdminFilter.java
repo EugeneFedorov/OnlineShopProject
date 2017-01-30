@@ -19,7 +19,7 @@ public class RoleAdminFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = ((HttpServletRequest) servletRequest);
         Object adminData = request.getSession().getAttribute("admin");
-        if (adminData == null) {
+        if (adminData == null && request.getRequestURI().contains("/main")) {
             servletRequest.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(servletRequest, servletResponse);
         }
         filterChain.doFilter(servletRequest, servletResponse);

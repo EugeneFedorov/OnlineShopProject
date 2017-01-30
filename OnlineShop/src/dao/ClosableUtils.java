@@ -1,7 +1,5 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,7 +16,6 @@ public final class ClosableUtils {
         if (closable != null) {
             try {
                 closable.close();
-                System.out.println("Resource close");
             } catch (Exception e) {
                 log.log(Level.WARNING, String.format("Was unable to close: %s%n", closable), e);
             }

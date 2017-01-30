@@ -1,12 +1,19 @@
-table {
-    width: 50%;
-    background: white;
-    color: #1f1f1f;
-    border-spacing: 1px;
+th {
+    font-weight: normal;
+    color: #039;
+    padding: 10px 15px;
 }
 
-td, th {
-    background: #86e894;
-    padding: 5px;
-    width: 20%;
+td {
+    color: #669;
+    border-top: 1px solid #e8edff;
+    padding: 10px 15px;
+}
+
+tr:hover td {
+    background: #e8edff;
+}
+
+td:hover td {
+    background: #14ff31;
 }

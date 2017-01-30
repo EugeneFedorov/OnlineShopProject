@@ -1,5 +1,9 @@
 package servlet;
 
+import dao.GoodsDao;
+import dto.GoodsDto;
+import entity.Goods;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -8,9 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,16 +30,16 @@ public class download extends HttpServlet {
         String username = request.getSession().getAttribute("user").toString();
 
         Enumeration<String> enumeration = req.getParameterNames();
-        Map<Long, Double> goodsOrder = new HashMap<>();
+        Map<Long, Goods> goodsOrder = new HashMap<>();
         while (enumeration.hasMoreElements()) {
             String name = enumeration.nextElement();
             Long id = Long.valueOf(name);
-            Double amount = toDouble(req.getParameter(name));
-            goodsOrder.put(id, amount);
+            Goods goods = new GoodsDao().getById(id);
+            goodsOrder.put(id, goods);
         }
 
 
-        new MakeFile().makeFile(goodsOrder);
+        new CreateFile().makeFile(goodsOrder);
 
         resp.setContentType("text/plain");
         resp.setHeader("Content-Disposition", "attachment;filename=goods.txt");
@@ -66,14 +70,14 @@ public class download extends HttpServlet {
         return result;
     }
 
-    static class MakeFile {
-        static void makeFile(Map<Long, Double> map) throws IOException {
+    static class CreateFile {
+        static void makeFile(Map<Long, Goods> map) throws IOException {
             File file = new File("c://Work//Repository//OnlineShop//out//artifacts//web_war_exploded", "goods.txt");
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (Map.Entry entry : map.entrySet()) {
-                bufferedWriter.write(entry.getKey().toString() + " - ");
-                bufferedWriter.write(entry.getValue() + "\n");
+                bufferedWriter.write(entry.getValue().toString());
+                bufferedWriter.write("\n");
             }
             fileWriter.flush();
             bufferedWriter.flush();

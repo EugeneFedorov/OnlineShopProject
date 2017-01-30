@@ -69,10 +69,10 @@ public class Goods {
 
     @Override
     public String toString() {
-        return "ID_GOOD " + id +
-                " NAME_GOOD " + name +
-                " DESCRIPTION " + description +
-                " PRICE " + price +
-                " REMAINING_AMOUNT " + remainingAmount;
+        return "ID_GOOD = " + id +
+                " | NAME_GOOD is " + name +
+                " | DESCRIPTION " + description +
+                " | PRICE = " + price +
+                " | REMAINING_AMOUNT = " + remainingAmount;
     }
 }

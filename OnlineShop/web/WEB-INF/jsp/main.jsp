@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="language"
        value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
@@ -29,31 +28,18 @@
 <html>
 <head>
     <title>main</title>
-    <style>
-        table {
-            width: 50%;
-            background: white;
-            color: #1f1f1f;
-            border-spacing: 1px;
-        }
-
-        td, th {
-            background: #86e894;
-            padding: 5px;
-            width: 20%;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/main" method="post">
     <table>
         <thead>
         <tr>
-            <th>name</th>
-            <th>description</th>
-            <th>price</th>
-            <th>amount</th>
-            <th>add to order</th>
+            <th><fmt:message key="main.Name"/></th>
+            <th><fmt:message key="main.Description"/></th>
+            <th><fmt:message key="main.Price"/></th>
+            <th><fmt:message key="main.Amount"/></th>
+            <th><fmt:message key="main.CreateOrder"/></th>
         </tr>
         </thead>
         <tbody>
@@ -70,7 +56,7 @@
         </c:forEach>
         </tbody>
     </table>
-    <p><input type="submit" value="Оформить заказ"></p>
+    <p><input type="submit" value=<fmt:message key="main.Checkout"/>></p>
 </form>
 
 <form action="${pageContext.request.contextPath}/main/download" method="get">
@@ -98,7 +84,7 @@
         </c:forEach>
         </tbody>
     </table>
-    <button type="submit"><fmt:message key="main.download"/></button>
+    <button type="submit"><fmt:message key="main.Download"/></button>
 </form>
 
 </body>
